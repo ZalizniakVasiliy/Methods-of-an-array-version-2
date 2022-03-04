@@ -95,14 +95,25 @@ alert(arrayFill(`x`, 5));
 const arr = [1, 3, 2, 0, 0, 0, 3, 2, 15, 5, 1];
 function countFirstItems(array) {
   let sum = 0;
-  for (let i = 1; i <= array.length; i++) {
+  for (let i = 0; i <= array.length; i++) {
     sum += array[i];
     if (sum > 10) {
-      return i;
+      return i + 1;
     }
   }
 }
 console.log(countFirstItems(arr)); // 8
+
+let sumFirstElem = arr.reduce(
+   (accum, item) => {
+     if (accum.sum > 10) return accum;
+     accum.sum += item;
+     accum.amountElems += 1;
+     return accum;
+  },
+  { sum: 0, amountElems: 0 }
+ ).amountElems;
+ console.log(sumFirstElem);
 
 /* task 9 */
 
@@ -123,6 +134,12 @@ for (let i = 0; i < arr.length; i++) {
   }
 }
 alert(sum);
+
+ const arr = [[1, 2, 3], [4, 5], [6]];
+ const sumArr = arr
+   .reduce((accum, item) => accum.concat(item))
+   .reduce((accum, item) => accum + item, 0);
+ console.log(sumArr);
 
 /* task 11 */
 
@@ -145,3 +162,8 @@ for (let i = 0; i < arr.length; i++) {
   }
 }
 alert(sum);
+
+const sumElemsArr = arr
+   .flat(Infinity)
+   .reduce((sum, currentItem) => sum + currentItem, 0);
+console.log(sumElemsArr); //создаём новый массив
